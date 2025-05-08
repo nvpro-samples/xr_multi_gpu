@@ -1,4 +1,7 @@
 # xr_multi_gpu
+
+![xr_multi_gpu](/doc/xr_multi_gpu.webp)
+
 This sample focuses on multi-GPU side-by-side stereo rendering, as it is common for most XR HMDs. The frames can be presented either to an OpenXR runtime or – for easier testing and debugging – to a Win32 window.
 
 ## Introduction
