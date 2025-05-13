@@ -18,7 +18,6 @@
  */
 #include "App.hpp"
 
-#include "SimpleTimingProfiler.hpp"
 #include "WindowUserInterface.hpp"
 #include "XrUserInterface.hpp"
 

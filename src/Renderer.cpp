@@ -22,6 +22,8 @@
 #include "Options.hpp"
 #include "RenderTarget.hpp"
 
+VULKAN_HPP_DEFAULT_DISPATCH_LOADER_DYNAMIC_STORAGE
+
 namespace xrmg {
 static const std::filesystem::path g_pipelineCachePath = "./" SAMPLE_NAME ".pipeline-cache.bin";
 
@@ -36,9 +38,13 @@ static const std::vector<const char *> g_vulkanDeviceExtensions = {
 };
 
 Renderer::Renderer(std::unique_ptr<UserInterface> p_userInterface) : m_userInterface(std::move(p_userInterface)) {
+  VULKAN_HPP_DEFAULT_DISPATCHER.init();
+
   vk::ApplicationInfo appInfo(SAMPLE_NAME, 1, nullptr, 0, VK_API_VERSION_1_4);
   vk::InstanceCreateInfo instanceCreateInfo({}, &appInfo, {}, g_vulkanInstanceExtensions);
   m_vkInstance = m_userInterface->createVkInstance(instanceCreateInfo);
+
+  VULKAN_HPP_DEFAULT_DISPATCHER.init(m_vkInstance.get());
 
   this->fillPhysicalDevices();
   this->createQueueFamilies();

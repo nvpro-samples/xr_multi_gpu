@@ -20,11 +20,10 @@
 #define _USE_MATH_DEFINES
 
 #ifdef _WIN32
-#ifndef NOMINMAX
-#define NOMINMAX
+#include <stdlib.h>
+#ifndef WIN32_LEAN_AND_MEAN
+#define WIN32_LEAN_AND_MEAN
 #endif
-// #define WIN32_LEAN_AND_MEAN
-#define VK_USE_PLATFORM_WIN32_KHR
 #include <windows.h>
 #endif
 
@@ -35,10 +34,6 @@
 #include <openxr/openxr.h>
 #include <openxr/openxr_platform.h>
 #include <openxr/openxr_reflection.h>
-
-#if __has_include("Superluminal/PerformanceAPI.h")
-#include <Superluminal/PerformanceAPI.h>
-#endif
 
 #include <chrono>
 #include <format>

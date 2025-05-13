@@ -56,8 +56,8 @@ const uint32_t MAX_TORUS_INSTANCE_COUNT =
 Scene::Scene(const Renderer &p_renderer) : m_renderer(p_renderer), m_currentBufferIndex(0) {
   vk::UniqueShaderModule layeredMeshModule = p_renderer.vkDevice().createShaderModuleUnique({{}, g_layeredMeshSrc});
   std::vector<vk::PipelineShaderStageCreateInfo> stages = {
-      {{}, vk::ShaderStageFlagBits::eVertex, layeredMeshModule.get(), "main"},
-      {{}, vk::ShaderStageFlagBits::eFragment, layeredMeshModule.get(), "main"}};
+      {{}, vk::ShaderStageFlagBits::eVertex, layeredMeshModule.get(), "vs"},
+      {{}, vk::ShaderStageFlagBits::eFragment, layeredMeshModule.get(), "fs"}};
 
   vk::PipelineVertexInputStateCreateInfo vertexInputState({}, g_vertexInputBindingDescs, g_vertexInputAttributeDescs);
   vk::PipelineInputAssemblyStateCreateInfo inputAssemblyState({}, vk::PrimitiveTopology::eTriangleStrip, true);

@@ -26,15 +26,10 @@
 
 #include <optional>
 
-#ifndef PERFORMANCEAPI_ENABLED
-#define PERFORMANCEAPI_INSTRUMENT(_name) (void)0
-#endif
-
 #define XRMG_CONCAT_T(_a, _b) _a##_b
 #define XRMG_CONCAT(_a, _b) XRMG_CONCAT_T(_a, _b)
 #define XRMG_SCOPED_INSTRUMENT(_name)                                                                                  \
   VAP_SCOPED_INSTRUMENT(g_app->getProfiler(), _name, g_app->getCurrentFrameIndex());                                   \
-  PERFORMANCEAPI_INSTRUMENT(_name);                                                                                    \
   nvtx3::scoped_range XRMG_CONCAT(_nvtx3_scope, __LINE__)(_name)
 
 namespace xrmg {
