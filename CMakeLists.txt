@@ -37,10 +37,16 @@ _add_nvpro_core_lib()
 include(ExternalProject)
 set(OPENXR_INSTALL_DIR ${CMAKE_INSTALL_PREFIX}/bin_x64/openxr)
 ExternalProject_Add(
-    OpenXR-SDK
-    GIT_REPOSITORY https://github.com/KhronosGroup/OpenXR-SDK.git
-    GIT_TAG release-1.1.38
-    CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=${OPENXR_INSTALL_DIR}
+  OpenXR-SDK
+  GIT_REPOSITORY https://github.com/KhronosGroup/OpenXR-SDK.git
+  GIT_TAG release-1.1.38
+	CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=${OPENXR_INSTALL_DIR}
+  # Shorten paths for systems that run into MAX_PATH constraints
+  PREFIX ${CMAKE_BINARY_DIR}/OpenXR
+  BINARY_DIR ${CMAKE_BINARY_DIR}/OpenXR/build
+  SOURCE_DIR ${CMAKE_BINARY_DIR}/OpenXR/src
+  STAMP_DIR ${CMAKE_BINARY_DIR}/OpenXR/stamp
+  TMP_DIR ${CMAKE_BINARY_DIR}/OpenXR/tmp
 )
 # The OpenXR loader library ends in a `d` only if it's built in
 # debug mode and on Windows.
