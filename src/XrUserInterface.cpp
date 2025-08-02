@@ -180,7 +180,9 @@ std::optional<uint32_t> XrUserInterface::queryMainPhysicalDevice(vk::Instance p_
   };
   VkPhysicalDevice physicalDevice;
   XRMG_ASSERT_XR(xrGetVulkanGraphicsDevice2KHR(m_instance, &getInfo, &physicalDevice));
-  auto findIt = std::find(p_candidates, p_candidates + p_candidateCount, physicalDevice);
+  auto findIt = std::find_if(p_candidates, p_candidates + p_candidateCount, [&](const vk::PhysicalDevice &d) {
+    return static_cast<VkPhysicalDevice>(d) == physicalDevice;
+  });
   XRMG_ASSERT(findIt != p_candidates + p_candidateCount, "No compatible main physical device found for OpenXR.");
   m_mainPhysicalDevice = *findIt;
   return static_cast<uint32_t>(findIt - p_candidates);
